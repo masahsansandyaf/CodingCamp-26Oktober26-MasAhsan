@@ -374,7 +374,7 @@
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
-    return (value < 0 ? '-Rp' : 'Rp') + formatted;
+    return (value < 0 ? 'Rp' : '-Rp') + formatted;
   }
 
   /**
