@@ -374,7 +374,7 @@
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
-    return (value < 0 ? 'Rp' : 'Rp') + formatted;
+    return (value < 0 ? '-Rp' : 'Rp') + formatted;
   }
 
   /**
@@ -469,11 +469,11 @@
     if (!display) return;
 
     // Expenses are displayed as negative spending
-    const negativeTotal = -Math.abs(total);
-    display.textContent = total === 0 ? 'Rp 0.00' : formatCurrency(negativeTotal);
+    const negativeTotal = Math.abs(total);
+    display.textContent = total === 0 ? 'Rp 0.00' : formatCurrency(total);
 
-    display.classList.toggle('balance-amount--negative', total > 0);
-    display.classList.toggle('balance-amount--positive', total === 0);
+    display.classList.toggle('balance-amount--negative', total < 0);
+    display.classList.toggle('balance-amount--positive', total >== 0);
   }
 
   /**
@@ -505,7 +505,7 @@
 
       li.innerHTML =
         '<span class="item-name" title="' + escapeHtml(t.name) + '">' + escapeHtml(t.name) + '</span>' +
-        '<span class="item-amount">-' + formatCurrency(t.amount) + '</span>' +
+        '<span class="item-amount">' + formatCurrency(t.amount) + '</span>' +
         '<span class="item-category">' + escapeHtml(t.category) + '</span>' +
         '<button class="delete-btn" type="button" data-id="' + escapeHtml(t.id) + '" ' +
           'aria-label="Delete transaction: ' + escapeHtml(t.name) + '">✕</button>';
@@ -639,7 +639,7 @@
       li.className = 'monthly-summary-item';
       li.innerHTML =
         '<span class="month-label">' + escapeHtml(m.label) + '</span>' +
-        '<span class="month-total">-' + formatCurrency(m.total) + '</span>';
+        '<span class="month-total">' + formatCurrency(m.total) + '</span>';
       list.appendChild(li);
     });
   }
